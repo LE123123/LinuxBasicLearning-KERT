@@ -1,12 +1,8 @@
-import http from "http";
+const { app } = require("./app");
+const webSocket = require("./socket");
 
-const PORT = process.env.PORT || 8080;
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/html" });
-  res.end("Hello World!");
+const server = app.listen(app.get("PORT"), () => {
+  console.log(`listening on *:${app.get("PORT")}`);
 });
 
-server.listen(PORT, () => {
-  console.log(`Server is running in PORT ${PORT}`);
-});
+webSocket(server, app);
